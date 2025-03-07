@@ -5,6 +5,8 @@ import json
 import time
 import datetime
 import paho.mqtt.client as mqtt
+import re
+import math
 
 # MQTT配置
 BROKER_ADDRESS = "localhost"
@@ -12,6 +14,34 @@ BROKER_PORT = 1883
 CLIENT_ID = "python_chat_subscriber"
 TOPIC = "chat/#"  # 订阅所有聊天室
 QOS = 1
+
+def evaluate_expression(expression):
+    """安全地计算数学表达式"""
+    try:
+        # 移除所有空白字符
+        expression = ''.join(expression.split())
+        
+        # 验证表达式是否只包含允许的字符
+        if not re.match(r'^[0-9+\-*/(). ]+$', expression):
+            return "错误：表达式包含非法字符"
+        
+        # 使用eval安全地计算表达式
+        # 创建一个安全的局部命名空间
+        safe_dict = {
+            'abs': abs,
+            'float': float,
+            'int': int,
+            'max': max,
+            'min': min,
+            'pow': pow,
+            'round': round,
+            'math': math
+        }
+        
+        result = eval(expression, {"__builtins__": {}}, safe_dict)
+        return f"计算结果: {result}"
+    except Exception as e:
+        return f"计算错误: {str(e)}"
 
 def on_connect(client, userdata, flags, rc, properties=None):
     """连接回调函数"""
@@ -36,6 +66,25 @@ def on_message(client, userdata, msg):
         
         # 显示消息
         print(f"[{time_str}] {chat_msg['sender']} ({chat_msg['roomId']}): {chat_msg['content']}")
+        
+        # 检查消息是否是数学表达式
+        content = chat_msg['content'].strip()
+        if re.match(r'^[0-9+\-*/(). ]+$', content):
+            # 计算结果
+            result = evaluate_expression(content)
+            
+            # 创建回复消息
+            reply_msg = {
+                "sender": "计算器",
+                "content": result,
+                "roomId": chat_msg['roomId'],
+                "timestamp": int(time.time())
+            }
+            
+            # 发送回复
+            topic = f"chat/{chat_msg['roomId']}"
+            client.publish(topic, json.dumps(reply_msg), qos=QOS)
+            
     except Exception as e:
         print(f"解析消息错误: {e}")
 
