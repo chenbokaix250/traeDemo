@@ -1,0 +1,3 @@
+/Users/bokaichen/user/trae_project/traeDemo/timer/build/CMakeFiles/timer_example.dir
+/Users/bokaichen/user/trae_project/traeDemo/timer/build/CMakeFiles/edit_cache.dir
+/Users/bokaichen/user/trae_project/traeDemo/timer/build/CMakeFiles/rebuild_cache.dir
