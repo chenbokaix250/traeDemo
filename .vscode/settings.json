@@ -1,0 +1,30 @@
+{
+    "files.associations": {
+        "iosfwd": "cpp",
+        "condition_variable": "cpp",
+        "__node_handle": "cpp",
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "set": "cpp",
+        "stack": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "slist": "cpp",
+        "span": "cpp",
+        "atomic": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp",
+        "thread": "cpp",
+        "bitset": "cpp"
+    }
+}

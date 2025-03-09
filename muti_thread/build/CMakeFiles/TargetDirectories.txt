@@ -1,0 +1,3 @@
+/Users/bokaichen/trae_/traeDemo/muti_thread/build/CMakeFiles/thread_basic.dir
+/Users/bokaichen/trae_/traeDemo/muti_thread/build/CMakeFiles/edit_cache.dir
+/Users/bokaichen/trae_/traeDemo/muti_thread/build/CMakeFiles/rebuild_cache.dir
