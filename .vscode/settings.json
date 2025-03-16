@@ -25,6 +25,9 @@
         "fstream": "cpp",
         "ostream": "cpp",
         "thread": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "iomanip": "cpp",
+        "chrono": "cpp",
+        "iostream": "cpp"
     }
 }
