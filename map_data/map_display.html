@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>地图标注示例</title>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    
+    <script src="https://webapi.amap.com/maps?v=2.0&key=1b324dd68555d9d386e45dbf978d8b67"></script>
+    <script>
+        // 初始化地图
+        var map = new AMap.Map('container', {
+            zoom: 15,
+            center: [116.2735, 39.9985]  // 初始中心点
+        });
+
+        // 经纬度数据
+        var locations = [
+            {latitude: 39.997750, longitude: 116.273520, description: "桂湖起点"},
+            {latitude: 39.998200, longitude: 116.274100, description: "桂湖东侧"},
+            {latitude: 39.998800, longitude: 116.274500, description: "桂湖东北角"},
+            {latitude: 39.999300, longitude: 116.274300, description: "桂湖北侧"},
+            {latitude: 39.999500, longitude: 116.273800, description: "桂湖西北角"},
+            {latitude: 39.999300, longitude: 116.273200, description: "桂湖西侧"},
+            {latitude: 39.998800, longitude: 116.272900, description: "桂湖西南角"},
+            {latitude: 39.998200, longitude: 116.273100, description: "桂湖西侧"},
+            {latitude: 39.997800, longitude: 116.273600, description: "桂湖东南角"},
+            {latitude: 39.997750, longitude: 116.273520, description: "回到起点"}
+        ];
+
+        // 在地图上标注点
+        locations.forEach(function(location, index) {
+            var marker = new AMap.Marker({
+                position: [location.longitude, location.latitude],
+                label: {
+                    content: (index + 1).toString(),  // 显示数字
+                    offset: new AMap.Pixel(20, 20)   // 调整数字位置
+                },
+                title: `描述: ${location.description}\n纬度: ${location.latitude}\n经度: ${location.longitude}`  // 鼠标移上去时显示详细信息
+            });
+            marker.setMap(map);
+        });
+    </script>
+</body>
+</html>
